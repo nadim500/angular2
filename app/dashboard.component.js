@@ -9,43 +9,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var hero_detail_component_1 = require('./hero-detail.component');
 var hero_service_1 = require('./hero.service');
 var router_deprecated_1 = require('@angular/router-deprecated');
-/*export class Hero {
-  id : number;
-  name : string;
-  }*/
-var HeroesComponent = (function () {
-    function HeroesComponent(heroService, router) {
+var DashboardComponent = (function () {
+    function DashboardComponent(heroService, router) {
         this.heroService = heroService;
         this.router = router;
-        this.title = 'Tour of Heroes';
+        this.heroes = [];
     }
-    /*public heroes = HEROES;*/
-    HeroesComponent.prototype.getHeroes = function () {
+    DashboardComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.heroService.getHeroesSlowly().then(function (heroes) { return _this.heroes = heroes; });
+        this.heroService.getHeroes()
+            .then(function (heroes) { return _this.heroes = heroes.slice(1, 5); });
     };
-    HeroesComponent.prototype.ngOnInit = function () {
-        this.getHeroes();
+    DashboardComponent.prototype.gotoDetail = function (hero) {
+        var link = ['HERODETAIL', { id: hero.id }];
+        this.router.navigate(link);
     };
-    HeroesComponent.prototype.onSelect = function (hero) { this.selectedHero = hero; };
-    ;
-    HeroesComponent.prototype.gotoDetail = function () {
-        this.router.navigate(['HERODETAIL', { id: this.selectedHero.id }]);
-    };
-    HeroesComponent = __decorate([
+    DashboardComponent = __decorate([
         core_1.Component({
-            selector: 'my-heroes',
-            templateUrl: 'app/heroes.component.html',
-            styleUrls: ['app/heroes.component.css'],
-            directives: [hero_detail_component_1.HeroDetailComponent],
-            providers: []
+            selector: 'my-dashboard',
+            templateUrl: 'app/dashboard.component.html',
+            styleUrls: ['app/dashboard.component.css']
         }), 
         __metadata('design:paramtypes', [hero_service_1.HeroService, router_deprecated_1.Router])
-    ], HeroesComponent);
-    return HeroesComponent;
+    ], DashboardComponent);
+    return DashboardComponent;
 }());
-exports.HeroesComponent = HeroesComponent;
-//# sourceMappingURL=heroes.component.js.map
+exports.DashboardComponent = DashboardComponent;
+//# sourceMappingURL=dashboard.component.js.map

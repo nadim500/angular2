@@ -1,5 +1,5 @@
 DUIVAN;
 -PC;
-.436;
-1465846472;
+.4412;
+1465914726;
 //# sourceMappingURL=.#heroes.component.js.map
